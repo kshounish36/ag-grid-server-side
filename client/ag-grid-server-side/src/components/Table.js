@@ -24,6 +24,17 @@ const Table = () => {
     { headerName: "Bronze", field: 'bronze', filter: "agTextColumnFilter" },
     { headerName: "Total", field: 'total', filter: "agTextColumnFilter" },
   ]);
+
+  const defaultColDef = useMemo(() => {
+    return {
+      flex: 1,
+      minWidth: 90,
+      resizable: true,
+      filter: true, 
+      floatingFilter: true, 
+      sortable: true
+    };
+  }, []);
   
   const onGridReady = useCallback((params) => {
     setGridApi(params.api);
@@ -47,7 +58,7 @@ const Table = () => {
             rowModelType={'serverSide'}
             serverSideStoreType={'partial'}
             onGridReady={onGridReady}
-            defaultColDef={{ filter: true, floatingFilter: true, sortable: true }}
+            defaultColDef={ defaultColDef }
             />
         </div>
       </div>

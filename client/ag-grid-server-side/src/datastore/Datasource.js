@@ -1,8 +1,10 @@
+const API_URL = `http://localhost:4000/olympic?`
+
 const datasource = {
     getRows(params) {
       console.log(JSON.stringify(params.request, null, 1));
       const { startRow, endRow, filterModel, sortModel } = params.request
-      let url = `http://localhost:4000/olympic?`
+      let url = API_URL
       //Sorting
       if (sortModel.length) {
         const { colId, sort } = sortModel[0]
