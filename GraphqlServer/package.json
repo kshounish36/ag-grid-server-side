@@ -10,7 +10,7 @@
       "client": "npm start --prefix client",
       "dev": "concurrently \"npm run dev:server\" \"npm run json:server\" \"npm run client\""
     },
-    "author": "Ahmed Gadir",
+    "author": "Kshounish Mangal",
     "license": "MIT",
     "dependencies": {
       "axios": "^0.20.0",
