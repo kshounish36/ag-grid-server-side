@@ -69,7 +69,6 @@ const RootQuery = new GraphQLObjectType({
         getRows: {
             type: ResponseType,
             args: {
-                // ** non-nulls are required **
                 startRow: { type: GraphQLNonNull(GraphQLInt) },
                 endRow: { type: GraphQLNonNull(GraphQLInt) },
                 sortModel: { type: new GraphQLList(SortModelType) },
@@ -91,9 +90,9 @@ const RootQuery = new GraphQLObjectType({
                         fields.push(sM.colId);
                         orders.push(sM.sort)
                     });
-                    // sorting
+
                     endPoint += `?_sort=${fields.join(',')}&_order=${orders.join(',')}`;
-                    // starting from start row with a limit of endRow - startRows rows
+
                     endPoint += `&_start=${args.startRow}&_limit=${args.endRow - args.startRow}`;
                 } else {
                     endPoint += `?_start=${args.startRow}&_end=${args.endRow}`;
@@ -123,47 +122,6 @@ const RootQuery = new GraphQLObjectType({
     }
 });
 
-const Mutation = new GraphQLObjectType({
-    name: 'Mutation',
-    fields: {
-        createRow: {
-            type: OlympicWinnerType,
-            args: {
-                data: { type: GraphQLNonNull(OlympicWinnerInputType) },
-            },
-            resolve(parentValue, args) {
-                return axios.post(JSON_SERVER_ENDPOINT, args.data)
-                    .then(res => res.data)
-                    .catch(err => console.log(err));
-            }
-        },
-        updateRow: {
-            type: OlympicWinnerType,
-            args: {
-                data: { type: GraphQLNonNull(OlympicWinnerInputType) },
-            },
-            resolve(parentValue, args) {
-                return axios.patch(`${JSON_SERVER_ENDPOINT}/${args.data.id}`, args.data)
-                    .then(res => res.data)
-                    .catch(err => console.log(err));
-            }
-        },
-        deleteRow: {
-            type: OlympicWinnerType,
-            args: {
-                id: { type: GraphQLNonNull(GraphQLID) }
-            },
-            resolve(parentValue, args) {
-                return axios.delete(`${JSON_SERVER_ENDPOINT}/${args.id}`)
-                    .then(res => res.data)
-                    .catch(err => console.log(err))
-            }
-        }
-    }
-})
-
-
 module.exports = new GraphQLSchema({
-    query: RootQuery,
-    mutation: Mutation
+    query: RootQuery
 })
