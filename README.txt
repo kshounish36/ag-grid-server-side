@@ -1,9 +1,9 @@
 # REACT AG-GRID SERVER SIDE RENDERING
 
 # Open the project directory in the terminal
-# cd Server 
+# cd GraphqlServer 
 # npm install
-# npm start
+# npm run dev
 
 # Open the project directory in another terminal
 # cd client
@@ -11,4 +11,4 @@
 # npm install
 # npm start
 
-# Open the application on localhost:3000 in browser
+# Open the application on localhost:3006 in browser

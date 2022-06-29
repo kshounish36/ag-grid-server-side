@@ -42,7 +42,7 @@ const Table = () => {
 
   useEffect(() => {
     if(gridApi) {
-      gridApi.setServerSideDatasource(datasource);
+      gridApi.setServerSideDatasource(datasource());
     }
   }, [gridApi]);
 
