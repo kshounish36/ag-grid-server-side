@@ -10,14 +10,14 @@ const datasource = () => {
     getRows: (params) => {
       console.log(JSON.stringify(params.request, null, 1));
       let { startRow, endRow, filterModel, sortModel } = params.request
-
       sortModel = sortModel.length > 0 ? sortModel : undefined;
+      filterModel = Object.keys(filterModel).length > 0 ? filterModel : undefined;
       const visibleColumnIds = params.columnApi.getAllDisplayedColumns().map(col => col.getColId());
-
+      console.log(filterModel)
       const query = {
         query: gql`
-          query GetRows($startRow: Int!, $endRow: Int!, $sortModel: [SortModel]) {
-            getRows(startRow: $startRow, endRow: $endRow, sortModel: $sortModel) {
+          query GetRows($startRow: Int!, $endRow: Int!, $sortModel: [SortModel], $filterModel: [FilterModel]) {
+            getRows(startRow: $startRow, endRow: $endRow, sortModel: $sortModel, filterModel: $filterModel) {
                 lastRow
                 rows { 
                     id, 
